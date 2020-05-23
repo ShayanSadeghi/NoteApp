@@ -13,7 +13,7 @@ module.exports = validateRegisterInput =(data)=>{
         errors.name = 'Name must be between 3 and 30 characters';
     }
 
-    if(!Validator.isEmpty(data.name)){
+    if(Validator.isEmpty(data.name)){
         errors.name = 'Name is required';
 
     }
@@ -23,7 +23,7 @@ module.exports = validateRegisterInput =(data)=>{
 
     }
 
-    if(!Validator.isEmpty(data.email)){
+    if(Validator.isEmpty(data.email)){
         errors.email = 'Email is required';
 
     }
@@ -33,7 +33,7 @@ module.exports = validateRegisterInput =(data)=>{
 
 
     }
-    if(!Validator.isEmpty(data.password)){
+    if(Validator.isEmpty(data.password)){
         errors.password = 'Password is required';
 
     }
@@ -42,7 +42,7 @@ module.exports = validateRegisterInput =(data)=>{
         errors.password2 = 'Passwords must be match'
     }
 
-    if(!Validator.isEmpty(data.password2)){
+    if(Validator.isEmpty(data.password2)){
         errors.password2 = 'Password Confirm is required';
 
     }
