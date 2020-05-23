@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 
 const validateRegisterInput = require("../../validation/register");
+const validateLoginInput = require("../../validation/login");
 
 const User = require("../../models/User");
 
@@ -39,5 +40,34 @@ router.post("/register", (req, res) => {
     })
     .catch((err) => res.status(400).json(err));
 });
+
+
+router.post('/login',(req,res)=>{
+  const {errors, isValid} = validateLoginInput(req.body);
+
+  if(!isValid){
+    return res.status(400).json(errors);
+  }
+
+  const email = req.body.email;
+  const password = req.body.password;
+
+  User.findOne({email}).then(user=>{
+    if(!user){
+      errors.email = 'User not found';
+      return res.status(404).json(errors);
+    }
+
+    bcrypt.compare(password,user.password).then(isTrue=>{
+      if(isTrue){
+        return res.send(`Welcome ${user.name}`);
+      }else{
+        errors.password = 'Incorrect Password';
+        return res.status(400).json(errors);
+      }
+    })
+  })
+
+})
 
 module.exports = router;
