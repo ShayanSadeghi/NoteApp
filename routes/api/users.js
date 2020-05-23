@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken');
 
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
@@ -60,7 +61,15 @@ router.post('/login',(req,res)=>{
 
     bcrypt.compare(password,user.password).then(isTrue=>{
       if(isTrue){
-        return res.send(`Welcome ${user.name}`);
+        const payload = {id:user.id,name:user.name}
+
+        jwt.sign(payload,'secret',{expiresIn: '1h' },(err,token)=>{
+          res.json({
+            success:true,
+            token: 'Bearer ' + token
+          });
+        });
+
       }else{
         errors.password = 'Incorrect Password';
         return res.status(400).json(errors);
