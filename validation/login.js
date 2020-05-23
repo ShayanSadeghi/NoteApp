@@ -18,5 +18,10 @@ module.exports = validateLoginInput = (data)=>{
     if (Validator.isEmpty(data.password)){
         errors.password = "Password is required to login";
     }
+    
+    return {
+        errors,
+        isValid : isEmpty(errors)
+    };
 
 };
