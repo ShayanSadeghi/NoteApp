@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Schema = mangoose.Schema();
+const Schema = mongoose.Schema;
 
 //Create Schema
 const NoteSchema = new Schema({
@@ -15,4 +15,4 @@ const NoteSchema = new Schema({
     }
 });
 
-module.exports = Note = mongoose.Schema('note',NoteSchema);
+module.exports = Note = mongoose.model('note',NoteSchema);
