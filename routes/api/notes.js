@@ -12,6 +12,7 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const newNote = new Note({
+      user: req.user.id,
       title: req.body.title,
       body: req.body.body,
     });
