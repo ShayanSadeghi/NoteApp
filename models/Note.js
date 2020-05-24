@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 
 //Create Schema
 const NoteSchema = new Schema({
+    user:{
+        type: Schema.Types.ObjectId,
+        ref: 'users'
+    },
     title:{
         type:String
     },
