@@ -21,4 +21,20 @@ router.post(
   }
 );
 
+//Remove Note
+router.delete(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Note.findById(req.params.id)
+      .then((note) => {
+        if (note.user.toString() !== req.user.id) {
+          return res(401).json({ notAuthorized: "User not authorized" });
+        }
+        note.remove().then(() => res.json({ success: true }));
+      })
+      .catch((err) => res.status(404).json({ postNotFound: "No post found" }));
+  }
+);
+
 module.exports = router;
