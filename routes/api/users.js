@@ -10,6 +10,7 @@ const validateLoginInput = require("../../validation/login");
 
 const User = require("../../models/User");
 
+//Register New User
 router.post("/register", (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
 
@@ -44,7 +45,7 @@ router.post("/register", (req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
-
+//Login User
 router.post('/login',(req,res)=>{
   const {errors, isValid} = validateLoginInput(req.body);
 
@@ -81,7 +82,7 @@ router.post('/login',(req,res)=>{
 
 })
 
-
+//Show the current user data
 router.get('/current', passport.authenticate('jwt',{session:false}),
  (req,res)=>{
    res.json({
