@@ -1,11 +1,23 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const passportt = require('passport');
+const mongoose = require("mongoose");
+const passport = require("passport");
 
 //Note Model
-const Note = require('../../models/Note');
+const Note = require("../../models/Note");
 
+//Create new Note
+router.post(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const newNote = new Note({
+      title: req.body.title,
+      body: req.body.body,
+    });
 
+    newNote.save().then((note) => res.json(note));
+  }
+);
 
-
-module.exports =router;
+module.exports = router;
