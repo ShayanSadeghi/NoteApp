@@ -4,34 +4,34 @@ import {Link} from "react-router-dom";
 class Navbar extends Component {
   render() {
     return (
-      <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
-        <div class="container">
-          <Link class="navbar-brand" to="/">
+      <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+        <div className="container">
+          <Link className="navbar-brand" to="/">
             NoteApp
           </Link>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-toggle="collapse"
             data-target="#mobile-nav">
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="mobile-nav">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                <Link class="nav-link" to="/notes">
+          <div className="collapse navbar-collapse" id="mobile-nav">
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item">
+                <Link className="nav-link" to="/notes">
                   Notes
                 </Link>
               </li>
             </ul>
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                <Link class="nav-link" to="/">
+            <ul className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <Link className="nav-link" to="/">
                   Sign-up
                 </Link>
               </li>
-              <li class="nav-item">
-                <Link class="nav-link" to="/about">
+              <li className="nav-item">
+                <Link className="nav-link" to="/about">
                   About
                 </Link>
               </li>
