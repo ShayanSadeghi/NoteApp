@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
-import Signup from "./components/layout/Signup";
+import Signup from "./components/Signup";
 
 import "./App.css";
 
