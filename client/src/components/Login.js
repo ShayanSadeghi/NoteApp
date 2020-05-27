@@ -19,11 +19,11 @@ class Login extends Component {
                 <div className="sign-up-form">
                   <form>
                     <div className="form-group">
-                      <label for="email">Email</label>
+                      <label htmlFor="email">Email</label>
                       <input className="form-control" type="email" id="email" />
                     </div>
                     <div className="form-group">
-                      <label for="password">Password</label>
+                      <label htmlFor="password">Password</label>
                       <input
                         className="form-control"
                         type="password"

@@ -19,15 +19,15 @@ class Signup extends Component {
                 <div className="sign-up-form ">
                   <form>
                     <div className="form-group ">
-                      <label for="name">Name</label>
+                      <label htmlFor="name">Name</label>
                       <input className="form-control" type="text" id="name" />
                     </div>
                     <div className="form-group">
-                      <label for="email">Email</label>
+                      <label htmlFor="email">Email</label>
                       <input className="form-control" type="email" id="email" />
                     </div>
                     <div className="form-group">
-                      <label for="password">Password</label>
+                      <label htmlFor="password">Password</label>
                       <input
                         className="form-control"
                         type="password"
@@ -35,7 +35,7 @@ class Signup extends Component {
                       />
                     </div>
                     <div className="form-group">
-                      <label for="password2">Confirm password</label>
+                      <label htmlFor="password2">Confirm password</label>
                       <input
                         className="form-control"
                         type="password"
