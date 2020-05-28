@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 class Signup extends Component {
   constructor() {
@@ -13,10 +14,27 @@ class Signup extends Component {
     };
 
     this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+
+    const newUser = {
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password,
+      password2: this.state.password2,
+    };
+
+    axios
+      .post('/api/users/register', newUser)
+      .then(res => console.log(res.data))
+      .catch(err => this.setState({ errors: err.response.data }));
   }
 
   render() {
@@ -34,7 +52,7 @@ class Signup extends Component {
               </div>
               <div className="container col-md-6  text-light text-center">
                 <div className="sign-up-form ">
-                  <form>
+                  <form noValidate onSubmit={this.onSubmit}>
                     <div className="form-group ">
                       <label htmlFor="name">Name</label>
                       <input
