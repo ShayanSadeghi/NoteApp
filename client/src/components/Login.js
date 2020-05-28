@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import classnames from "classnames";
 
 class Login extends Component {
   constructor() {
@@ -7,28 +8,29 @@ class Login extends Component {
     this.state = {
       email: "",
       password: "",
-      errors:{}
+      errors: {},
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-
   }
 
-  onChange(e){
-    this.setState({[e.target.name]: e.target.value});
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
   }
-  
-  onSubmit(e){
+
+  onSubmit(e) {
     e.preventDefault();
 
     const userData = {
-      email : this.state.email,
-      password: this.state.password
-    }
+      email: this.state.email,
+      password: this.state.password,
+    };
     console.log(userData);
   }
 
   render() {
+    const { errors } = this.state;
+
     return (
       <div className="landing">
         <div className="dark-overlay text-light landing-inner">
@@ -50,10 +52,16 @@ class Login extends Component {
                         name="email"
                         value={this.state.email}
                         onChange={this.onChange}
-                        className="form-control"
+                        className={classnames("form-control", {
+                          "is-invalid": errors.email,
+                        })}
                         type="email"
-                        id="email"
                       />
+                      {errors.email ? (
+                        <div className="invalid-feedback">{errors.email} </div>
+                      ) : (
+                        ""
+                      )}
                     </div>
                     <div className="form-group">
                       <label htmlFor="password">Password</label>
@@ -61,10 +69,18 @@ class Login extends Component {
                         name="password"
                         value={this.state.password}
                         onChange={this.onChange}
-                        className="form-control"
+                        className={classnames("form-control", {
+                          "is-invalid": errors.password,
+                        })}
                         type="password"
-                        id="password"
                       />
+                      {errors.password ? (
+                        <div className="invalid-feedback">
+                          {errors.password}{" "}
+                        </div>
+                      ) : (
+                        ""
+                      )}
                     </div>
                     <button type="submit" className="btn btn-primary mr-5">
                       Login
