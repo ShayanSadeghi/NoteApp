@@ -2,6 +2,23 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 class Signup extends Component {
+  constructor() {
+    super();
+    this.state = {
+      name: "",
+      email: "",
+      password: "",
+      password2: "",
+      errors: {},
+    };
+
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
   render() {
     return (
       <div className="landing">
@@ -20,15 +37,32 @@ class Signup extends Component {
                   <form>
                     <div className="form-group ">
                       <label htmlFor="name">Name</label>
-                      <input className="form-control" type="text" id="name" />
+                      <input
+                        name="name"
+                        value={this.state.name}
+                        onChange={this.onChange}
+                        className="form-control"
+                        type="text"
+                        id="name"
+                      />
                     </div>
                     <div className="form-group">
                       <label htmlFor="email">Email</label>
-                      <input className="form-control" type="email" id="email" />
+                      <input
+                        name="email"
+                        value={this.state.email}
+                        onChange={this.onChange}
+                        className="form-control"
+                        type="email"
+                        id="email"
+                      />
                     </div>
                     <div className="form-group">
                       <label htmlFor="password">Password</label>
                       <input
+                        name="password"
+                        value={this.state.password}
+                        onChange={this.onChange}
                         className="form-control"
                         type="password"
                         id="password"
@@ -37,6 +71,9 @@ class Signup extends Component {
                     <div className="form-group">
                       <label htmlFor="password2">Confirm password</label>
                       <input
+                        name="password2"
+                        value={this.state.password2}
+                        onChange={this.onChange}
                         className="form-control"
                         type="password"
                         id="password2"
