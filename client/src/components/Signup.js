@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import classnames from "classnames";
 
 class Signup extends Component {
   constructor() {
@@ -32,12 +33,14 @@ class Signup extends Component {
     };
 
     axios
-      .post('/api/users/register', newUser)
+      .post("/api/users/register", newUser)
       .then(res => console.log(res.data))
       .catch(err => this.setState({ errors: err.response.data }));
   }
 
   render() {
+    const { errors } = this.state;
+
     return (
       <div className="landing">
         <div className="dark-overlay text-light landing-inner">
@@ -59,10 +62,12 @@ class Signup extends Component {
                         name="name"
                         value={this.state.name}
                         onChange={this.onChange}
-                        className="form-control"
+                        className={classnames("form-control", {
+                          "is-invalid": errors.name,
+                        })}
                         type="text"
-                        id="name"
                       />
+                      {errors.name?<div className="invalid-feedback">{errors.name} </div>:''}
                     </div>
                     <div className="form-group">
                       <label htmlFor="email">Email</label>
@@ -70,10 +75,12 @@ class Signup extends Component {
                         name="email"
                         value={this.state.email}
                         onChange={this.onChange}
-                        className="form-control"
+                        className={classnames("form-control",{
+                          "is-invalid": errors.email
+                        })}
                         type="email"
-                        id="email"
                       />
+                      {errors.email? <div className="invalid-feedback">{errors.email}</div>:''}
                     </div>
                     <div className="form-group">
                       <label htmlFor="password">Password</label>
@@ -81,10 +88,12 @@ class Signup extends Component {
                         name="password"
                         value={this.state.password}
                         onChange={this.onChange}
-                        className="form-control"
+                        className={classnames("form-control",{
+                          "is-invalid": errors.password
+                        })}
                         type="password"
-                        id="password"
                       />
+                      {errors.password? <div className="invalid-feedback">{errors.password}</div>:''}
                     </div>
                     <div className="form-group">
                       <label htmlFor="password2">Confirm password</label>
@@ -92,10 +101,13 @@ class Signup extends Component {
                         name="password2"
                         value={this.state.password2}
                         onChange={this.onChange}
-                        className="form-control"
+                        className={classnames("form-control",{
+                          "is-invalid": errors.password2
+                        })}
                         type="password"
-                        id="password2"
                       />
+                      {errors.password2? <div className="invalid-feedback">{errors.password2}</div>:''}
+
                     </div>
                     <button type="submit" className="btn btn-primary mr-5">
                       Sign Up
