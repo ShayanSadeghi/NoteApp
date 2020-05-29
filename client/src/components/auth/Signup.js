@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { registerUser } from "../../actions/authActions";
 import classnames from "classnames";
 
 class Signup extends Component {
@@ -32,10 +32,7 @@ class Signup extends Component {
       password2: this.state.password2,
     };
 
-    axios
-      .post("/api/users/register", newUser)
-      .then(res => console.log(res.data))
-      .catch(err => this.setState({ errors: err.response.data }));
+    registerUser(newUser,this.props.history);
   }
 
   render() {
@@ -67,7 +64,11 @@ class Signup extends Component {
                         })}
                         type="text"
                       />
-                      {errors.name?<div className="invalid-feedback">{errors.name} </div>:''}
+                      {errors.name ? (
+                        <div className="invalid-feedback">{errors.name} </div>
+                      ) : (
+                        ""
+                      )}
                     </div>
                     <div className="form-group">
                       <label htmlFor="email">Email</label>
@@ -75,12 +76,16 @@ class Signup extends Component {
                         name="email"
                         value={this.state.email}
                         onChange={this.onChange}
-                        className={classnames("form-control",{
-                          "is-invalid": errors.email
+                        className={classnames("form-control", {
+                          "is-invalid": errors.email,
                         })}
                         type="email"
                       />
-                      {errors.email? <div className="invalid-feedback">{errors.email}</div>:''}
+                      {errors.email ? (
+                        <div className="invalid-feedback">{errors.email}</div>
+                      ) : (
+                        ""
+                      )}
                     </div>
                     <div className="form-group">
                       <label htmlFor="password">Password</label>
@@ -88,12 +93,18 @@ class Signup extends Component {
                         name="password"
                         value={this.state.password}
                         onChange={this.onChange}
-                        className={classnames("form-control",{
-                          "is-invalid": errors.password
+                        className={classnames("form-control", {
+                          "is-invalid": errors.password,
                         })}
                         type="password"
                       />
-                      {errors.password? <div className="invalid-feedback">{errors.password}</div>:''}
+                      {errors.password ? (
+                        <div className="invalid-feedback">
+                          {errors.password}
+                        </div>
+                      ) : (
+                        ""
+                      )}
                     </div>
                     <div className="form-group">
                       <label htmlFor="password2">Confirm password</label>
@@ -101,13 +112,18 @@ class Signup extends Component {
                         name="password2"
                         value={this.state.password2}
                         onChange={this.onChange}
-                        className={classnames("form-control",{
-                          "is-invalid": errors.password2
+                        className={classnames("form-control", {
+                          "is-invalid": errors.password2,
                         })}
                         type="password"
                       />
-                      {errors.password2? <div className="invalid-feedback">{errors.password2}</div>:''}
-
+                      {errors.password2 ? (
+                        <div className="invalid-feedback">
+                          {errors.password2}
+                        </div>
+                      ) : (
+                        ""
+                      )}
                     </div>
                     <button type="submit" className="btn btn-primary mr-5">
                       Sign Up
