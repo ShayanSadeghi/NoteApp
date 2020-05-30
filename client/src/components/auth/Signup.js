@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { registerUser } from "../../actions/authActions";
 import classnames from "classnames";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+
+import { registerUser } from "../../actions/authActions";
 
 class Signup extends Component {
   constructor() {
@@ -24,15 +28,15 @@ class Signup extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-
+  
     const newUser = {
       name: this.state.name,
       email: this.state.email,
       password: this.state.password,
       password2: this.state.password2,
     };
-
-    registerUser(newUser,this.props.history);
+    
+    this.props.registerUser(newUser, this.props.history);
   }
 
   render() {
@@ -142,4 +146,13 @@ class Signup extends Component {
   }
 }
 
-export default Signup;
+Signup.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = state => ({
+  errors: state.errors,
+});
+
+export default connect(mapStateToProps, { registerUser })(withRouter(Signup));
