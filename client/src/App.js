@@ -6,8 +6,10 @@ import store from "./store";
 
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
-import Signup from "./components/Signup";
-import Login from "./components/Login";
+import Signup from "./components/auth/Signup";
+import Login from "./components/auth/Login";
+
+import './App.css';
 
 class App extends Component {
   render() {
