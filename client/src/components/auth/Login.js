@@ -1,6 +1,10 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import classnames from "classnames";
+
+import { loginUser } from "../../actions/authActions";
 
 class Login extends Component {
   constructor() {
@@ -18,6 +22,14 @@ class Login extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  static getDerivedStateFromProps(props, state) {
+    if (props.errors) {
+      return {
+        errors: props.errors,
+      };
+    }
+  }
+
   onSubmit(e) {
     e.preventDefault();
 
@@ -25,7 +37,7 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password,
     };
-    console.log(userData);
+    this.props.loginUser(userData);
   }
 
   render() {
@@ -100,4 +112,15 @@ class Login extends Component {
   }
 }
 
-export default Login;
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors,
+});
+
+export default connect(mapStateToProps, { loginUser })(Login);
