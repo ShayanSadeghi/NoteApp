@@ -26,16 +26,24 @@ class Signup extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  static getDerivedStateFromProps(props, state) {
+    if (props.errors) {
+      return {
+        errors: props.errors,  //{errors} actually means this.state.errors
+      };
+    }
+  }
+
   onSubmit(e) {
     e.preventDefault();
-  
+
     const newUser = {
       name: this.state.name,
       email: this.state.email,
       password: this.state.password,
       password2: this.state.password2,
     };
-    
+
     this.props.registerUser(newUser, this.props.history);
   }
 
