@@ -6,6 +6,19 @@ const passport = require("passport");
 //Note Model
 const Note = require("../../models/Note");
 
+//Get user Notes
+router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Note.find({ user: req.user.id })
+      .then(notes => {
+        return res.json(notes);
+      })
+      .catch(err => res.status(404).json(err));
+  }
+);
+
 //Create new Note
 router.post(
   "/",
@@ -17,7 +30,7 @@ router.post(
       body: req.body.body,
     });
 
-    newNote.save().then((note) => res.json(note));
+    newNote.save().then(note => res.json(note));
   }
 );
 
@@ -27,13 +40,13 @@ router.delete(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Note.findById(req.params.id)
-      .then((note) => {
+      .then(note => {
         if (note.user.toString() !== req.user.id) {
           return res(401).json({ notAuthorized: "User not authorized" });
         }
         note.remove().then(() => res.json({ success: true }));
       })
-      .catch((err) => res.status(404).json({ postNotFound: "No post found" }));
+      .catch(err => res.status(404).json({ postNotFound: "No post found" }));
   }
 );
 
