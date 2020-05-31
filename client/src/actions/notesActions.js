@@ -1,7 +1,8 @@
 import axios from "axios";
 
-import { GET_USER_NOTES, GET_ERRORS } from "./types";
+import { GET_USER_NOTES, GET_ERRORS, CLEAR_NOTES } from "./types";
 
+//Get current user notes
 export const getUserNotes = () => dispatch => {
   axios
     .get("/api/notes")
@@ -17,4 +18,11 @@ export const getUserNotes = () => dispatch => {
         payload: err.response.data,
       });
     });
+};
+
+//Clear notes
+export const clearNotes = () => {
+  return {
+    type: CLEAR_NOTES,
+  };
 };
