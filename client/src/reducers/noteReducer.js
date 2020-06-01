@@ -1,6 +1,6 @@
 import { GET_USER_NOTES, CLEAR_NOTES } from "../actions/types";
 
-const initialState = {};
+const initialState = [];
 
 export default function (state = initialState, action) {
   switch (action.type) {
