@@ -13,7 +13,7 @@ class Dashboard extends Component {
     
     return (
       <div>
-        <div className=" container mb-4 d-inline-block">
+        <div className=" container mb-4 d-inline-block w20rem">
           <div className="mr-auto card border border-dark p-3">
             <div className="card-body">
               <img src="" alt="" className="card-img-top" />
