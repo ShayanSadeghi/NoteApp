@@ -37,13 +37,23 @@ export const loginUser = userData => dispatch => {
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data,
+        payload: err.response,
       })
     );
 };
 
+export const setCurrentUser = decoded => {
+  return {
+    type: SET_CURRENT_USER,
+    payload: decoded
+  };
+};
+
 //Logout User
 export const logoutUser = () => dispatch => {
+  if(localStorage.jwtToken){
+    localStorage.removeItem('jwtToken')
+  }
   dispatch({
     type: SET_CURRENT_USER,
     payload: {},
