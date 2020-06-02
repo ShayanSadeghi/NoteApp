@@ -1,7 +1,19 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 
 export default class UserInfo extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: this.props.title,
+      body: this.props.body,
+      path: this.props.history.location.pathname,
+    };
+  }
+
+  onNewNoteClick(e) {
+    this.props.history.push("/newNote");
+  }
+
   render() {
     const { user } = this.props;
     return (
@@ -11,15 +23,15 @@ export default class UserInfo extends Component {
             <img src="" alt="" className="card-img-top" />
             <p className="card-title">{user.name}</p>
             <p className="">Email: {user.email}</p>
-            <Link to="" className="btn btn-success d-block mb-2">
+            <button
+              className="btn btn-success d-block mb-2"
+              onClick={this.onNewNoteClick.bind(this)}>
               New Note
-            </Link>
-            <Link to="" className="btn btn-sm btn-outline-secondary ">
+            </button>
+            <button className="btn btn-sm btn-outline-secondary ">
               Profile
-            </Link>
-            <Link to="" className="btn btn-sm btn-outline-secondary">
-              Stats
-            </Link>
+            </button>
+            <button className="btn btn-sm btn-outline-secondary">Stats</button>
           </div>
         </div>
       </div>
