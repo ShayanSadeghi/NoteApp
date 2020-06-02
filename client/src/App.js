@@ -9,6 +9,8 @@ import Footer from "./components/layout/Footer";
 import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
 import Dashboard from "./components/dashboard/Dashboard";
+import Note from "./components/notes/Note";
+
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 import { clearNotes } from "./actions/notesActions";
@@ -45,6 +47,7 @@ class App extends Component {
           <Route exact path="/" component={Signup} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/newNote" component={Note} />
         </Router>
         <Footer />
       </Provider>
