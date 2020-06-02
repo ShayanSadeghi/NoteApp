@@ -33,7 +33,7 @@ export const saveNote = noteData => dispatch => {
     .catch(err => {
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data,
+        payload: err.response,
       });
     });
 };
