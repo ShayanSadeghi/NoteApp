@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { saveNote } from "../../actions/notesActions";
 
 class Note extends Component {
   constructor() {
@@ -10,10 +12,23 @@ class Note extends Component {
     };
 
     this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+
+    const noteData = {
+      user: this.props.auth.user._id,
+      title: this.state.title,
+      body: this.state.body,
+    };
+
+    this.props.saveNote(noteData);
   }
 
   render() {
@@ -51,7 +66,7 @@ class Note extends Component {
         {userData}
         <div className="container col-md-8 d-inline-block">
           <div className=" m-auto">
-            <form>
+            <form onSubmit={this.onSubmit}>
               <div className="form-group container m-auto">
                 <input
                   value={this.state.title}
@@ -88,8 +103,13 @@ class Note extends Component {
   }
 }
 
+Note.propTypes = {
+  auth: PropTypes.object.isRequired,
+  saveNote: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = state => ({
   auth: state.auth,
   user: state.user,
 });
-export default connect(mapStateToProps, {})(Note);
+export default connect(mapStateToProps, { saveNote })(Note);

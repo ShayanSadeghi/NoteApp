@@ -20,6 +20,24 @@ export const getUserNotes = () => dispatch => {
     });
 };
 
+//Save note
+export const saveNote = noteData => dispatch => {
+  axios
+    .post("/api/notes", noteData)
+    .then(res => {
+      dispatch({
+        type: GET_USER_NOTES,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      });
+    });
+};
+
 //Clear notes
 export const clearNotes = () => {
   return {
