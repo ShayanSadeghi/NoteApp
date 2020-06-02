@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 
 class Note extends Component {
   constructor() {
@@ -69,16 +68,17 @@ class Note extends Component {
                   className="form-control mb-2"
                   placeholder="Body"
                   rows="10"></textarea>
-                <Link
-                  to=""
-                  className="btn mr-2 btn-outline-success form-control-sm">
+                <button
+                  type="submit"
+                  className="btn mr-2 btn-outline-success form-control-sm"
+                  disabled={!this.state.title && !this.state.body}>
                   {" "}
                   Save
-                </Link>
-                <Link to="" className=" btn btn-outline-danger form-control-sm">
+                </button>
+                <button className=" btn btn-outline-danger form-control-sm">
                   {" "}
                   Cancel
-                </Link>
+                </button>
               </div>
             </form>
           </div>
