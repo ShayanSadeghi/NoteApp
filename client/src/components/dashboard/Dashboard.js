@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getUserNotes } from "../../actions/notesActions";
 import ShowCards from "./ShowCards";
+import UserInfo from "../layout/UserInfo";
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -15,28 +15,6 @@ class Dashboard extends Component {
     let notes = this.props.notes;
 
     let dashboardContent;
-
-    //Sidebox
-    const userData = (
-      <div className=" container mb-4 d-inline-block w20rem">
-        <div className="mr-auto card border border-dark p-3">
-          <div className="card-body">
-            <img src="" alt="" className="card-img-top" />
-            <p className="card-title">{user.name}</p>
-            <p className="">Email: {user.email}</p>
-            <Link to="" className="btn btn-success d-block mb-2">
-              New Note
-            </Link>
-            <Link to="" className="btn btn-sm btn-outline-secondary ">
-              Profile
-            </Link>
-            <Link to="" className="btn btn-sm btn-outline-secondary">
-              Stats
-            </Link>
-          </div>
-        </div>
-      </div>
-    );
 
     //Notes
     if (notes === null) {
@@ -65,7 +43,7 @@ class Dashboard extends Component {
 
     return (
       <div className="dashboard row">
-        {userData}
+        <UserInfo user={user} />
         <div className="container">
           <div className="row">{dashboardContent}</div>
         </div>

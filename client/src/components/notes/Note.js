@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { saveNote } from "../../actions/notesActions";
+import UserInfo from "../layout/UserInfo";
 
 class Note extends Component {
   constructor() {
@@ -33,51 +34,22 @@ class Note extends Component {
   }
 
   onCancelClik() {
-    
     let ans = true;
 
     if (this.state.title || this.state.body) {
       ans = window.confirm("Are you sure?");
     }
 
-    if (ans){
-      this.props.history.push("/dashboard")
+    if (ans) {
+      this.props.history.push("/dashboard");
     }
   }
 
   render() {
     const { user } = this.props.auth;
-
-    const userData = (
-      <div className=" container mb-4 d-inline-block w20rem">
-        <div className="mr-auto card border border-dark p-3">
-          <div className="card-body">
-            <img src="" alt="" className="card-img-top" />
-            <p className="card-title">{user.name}</p>
-            <p className="">Email:{user.email} </p>
-            <button to="/" className="btn btn-success d-block mb-2">
-              New Note
-            </button>
-            <button
-              to="/"
-              className="btn btn-sm btn-outline-secondary "
-              disabled>
-              Profile
-            </button>
-            <button
-              to="/"
-              className="btn btn-sm btn-outline-secondary"
-              disabled>
-              Stats
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-
     return (
       <div className="note row">
-        {userData}
+        <UserInfo user={user} />
         <div className="container col-md-8 d-inline-block">
           <div className=" m-auto">
             <form onSubmit={this.onSubmit}>
