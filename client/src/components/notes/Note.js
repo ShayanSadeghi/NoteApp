@@ -13,6 +13,7 @@ class Note extends Component {
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onCancelClik = this.onCancelClik.bind(this);
   }
 
   onChange(e) {
@@ -27,8 +28,21 @@ class Note extends Component {
       title: this.state.title,
       body: this.state.body,
     };
-
     this.props.saveNote(noteData);
+    this.props.history.push("/dashboard");
+  }
+
+  onCancelClik() {
+    
+    let ans = true;
+
+    if (this.state.title || this.state.body) {
+      ans = window.confirm("Are you sure?");
+    }
+
+    if (ans){
+      this.props.history.push("/dashboard")
+    }
   }
 
   render() {
@@ -90,7 +104,10 @@ class Note extends Component {
                   {" "}
                   Save
                 </button>
-                <button className=" btn btn-outline-danger form-control-sm">
+                <button
+                  onClick={this.onCancelClik}
+                  type="button"
+                  className=" btn btn-outline-danger form-control-sm">
                   {" "}
                   Cancel
                 </button>
