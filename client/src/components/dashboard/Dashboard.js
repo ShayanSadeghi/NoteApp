@@ -46,12 +46,12 @@ class Dashboard extends Component {
       console.log(notes);
       if (notes.length === 0) {
         dashboardContent = (
-          <div class="card mr-auto mb-3 w18rem">
-            <div class="card-body">
-              <img src="" alt="" class="card-img-top" />
-              <h5 class="card-title"> Welcome</h5>
-              <p class="card-text">You don't have any note Yet..</p>
-              <a href="" class="btn btn-outline-primary">
+          <div className="card mr-auto mb-3 w18rem">
+            <div className="card-body">
+              <img src="" alt="" className="card-img-top" />
+              <h5 className="card-title"> Welcome</h5>
+              <p className="card-text">You don't have any note Yet..</p>
+              <a href="" className="btn btn-outline-primary">
                 Start Now!
               </a>
             </div>
