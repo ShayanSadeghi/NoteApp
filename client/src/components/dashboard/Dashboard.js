@@ -28,15 +28,15 @@ class Dashboard extends Component {
               <img src="" alt="" className="card-img-top" />
               <h5 className="card-title"> Welcome</h5>
               <p className="card-text">You don't have any note Yet..</p>
-              <a href="" className="btn btn-outline-primary">
-                Start Now!
-              </a>
+              <button className="btn btn-outline-primary">Start Now!</button>
             </div>
           </div>
         );
       } else {
         //if user has some notes, we show them here
-        dashboardContent = notes.map(note => <ShowCards note={note} />);
+        dashboardContent = notes.map(note => (
+          <ShowCards key={note._id} note={note} />
+        ));
       }
     }
 
