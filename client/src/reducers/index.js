@@ -5,6 +5,6 @@ import noteReducer from "./noteReducer";
 
 export default combineReducers({
   auth: authReducer,
-  notes:noteReducer,
+  notes: noteReducer,
   errors: errorReducer,
 });

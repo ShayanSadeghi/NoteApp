@@ -1,15 +1,6 @@
 import React, { Component } from "react";
 
 export default class UserInfo extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: this.props.title,
-      body: this.props.body,
-      path: this.props.history.location.pathname,
-    };
-  }
-
   onNewNoteClick(e) {
     this.props.history.push("/newNote");
   }

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { saveNote } from "../../actions/notesActions";
-import UserInfo from "../layout/UserInfo";
 
 class Note extends Component {
   constructor() {
@@ -49,7 +48,6 @@ class Note extends Component {
     const { user } = this.props.auth;
     return (
       <div className="note row">
-        <UserInfo user={user} />
         <div className="container col-md-8 d-inline-block">
           <div className=" m-auto">
             <form onSubmit={this.onSubmit}>

@@ -21,7 +21,6 @@ class Dashboard extends Component {
       dashboardContent = <p>Loading...</p>;
     } else {
       // Welcome, write a new Note!
-      console.log(notes);
       if (notes.length === 0) {
         dashboardContent = (
           <div className="card mr-auto mb-3 w18rem">
