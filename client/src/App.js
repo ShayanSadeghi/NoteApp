@@ -47,7 +47,7 @@ class App extends Component {
           <Route exact path="/" component={Signup} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/dashboard" component={Dashboard} />
-          <Route exact path="/newNote" component={Note} />
+          <Route path="/newNote" component={Note} />
         </Router>
         <Footer />
       </Provider>
