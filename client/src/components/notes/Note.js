@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { saveNote } from "../../actions/notesActions";
+import { saveNote, getUserNotes } from "../../actions/notesActions";
 
 class Note extends Component {
   constructor() {
@@ -9,11 +9,16 @@ class Note extends Component {
     this.state = {
       title: "",
       body: "",
+      isNoteEmpty: true,
     };
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onCancelClik = this.onCancelClik.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.getUserNotes();
   }
 
   onChange(e) {
@@ -45,7 +50,20 @@ class Note extends Component {
   }
 
   render() {
-    const { user } = this.props.auth;
+    const pathSplited = window.location.pathname.split("/");
+    if (pathSplited.length === 3 && this.state.isNoteEmpty) {
+      this.props.notes.forEach(note => {
+        if (note._id === pathSplited[2]) {
+          this.setState({
+            title: note.title,
+            body: note.body,
+            isNoteEmpty: false,
+          });
+        }
+      });
+
+      // this.setState({ title: currentNote.title });
+    }
     return (
       <div className="note row">
         <div className="container col-md-8 d-inline-block">
@@ -53,6 +71,7 @@ class Note extends Component {
             <form onSubmit={this.onSubmit}>
               <div className="form-group container m-auto">
                 <input
+                  id="title"
                   value={this.state.title}
                   onChange={this.onChange}
                   name="title"
@@ -61,6 +80,7 @@ class Note extends Component {
                   type="text"
                 />
                 <textarea
+                  id="body"
                   value={this.state.body}
                   onChange={this.onChange}
                   name="body"
@@ -93,10 +113,11 @@ class Note extends Component {
 Note.propTypes = {
   auth: PropTypes.object.isRequired,
   saveNote: PropTypes.func.isRequired,
+  getUserNotes: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  user: state.user,
+  notes: state.notes,
 });
-export default connect(mapStateToProps, { saveNote })(Note);
+export default connect(mapStateToProps, { saveNote, getUserNotes })(Note);
