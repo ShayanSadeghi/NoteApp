@@ -22,18 +22,21 @@ export const getUserNotes = () => dispatch => {
 
 //Save note
 export const saveNote = noteData => dispatch => {
+  axios.post("/api/notes", noteData);
+};
+
+
+//Delete a note
+export const deleteNote = noteId => dispatch => {
   axios
-    .post("/api/notes", noteData)
+    .delete(`/api/notes/${noteId}`)
     .then(res => {
-      dispatch({
-        type: GET_USER_NOTES,
-        payload: res.data,
-      });
+      getUserNotes();
     })
     .catch(err => {
       dispatch({
         type: GET_ERRORS,
-        payload: err.response,
+        payload: err,
       });
     });
 };

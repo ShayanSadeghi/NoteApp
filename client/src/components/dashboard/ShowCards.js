@@ -1,24 +1,33 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { deleteNote } from "../../actions/notesActions";
 
 class ShowCards extends Component {
+  onDeleteClick(e) {
+    this.props.deleteNote(this.props.note._id);
+  }
+
   render() {
     return (
-      <div class="card mr-auto mb-3 w18rem">
-        <div class="card-body">
-          <img src="" alt="" class="card-img-top" />
-          <h5 class="card-title">{this.props.note.title}</h5>
-          <p class="card-text">{this.props.note.body}</p>
-          <Link to="" class="btn btn-outline-primary mr-2">
+      <div className="card mr-auto mb-3 w18rem">
+        <div className="card-body">
+          <img src="" alt="" className="card-img-top" />
+          <h5 className="card-title">{this.props.note.title}</h5>
+          <p className="card-text">{this.props.note.body}</p>
+          <button
+            onClick={this.onEditClick.bind(this)}
+            className="btn btn-outline-primary mr-2">
             Edit
-          </Link>
-          <Link to="" class="btn btn-danger">
+          </button>
+          <button
+            onClick={this.onDeleteClick.bind(this)}
+            className="btn btn-danger">
             Delete
-          </Link>
+          </button>
         </div>
       </div>
     );
   }
 }
 
-export default ShowCards;
+export default connect(null, { deleteNote })(ShowCards);
