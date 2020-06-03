@@ -3,6 +3,9 @@ import { connect } from "react-redux";
 import { deleteNote } from "../../actions/notesActions";
 
 class ShowCards extends Component {
+  onEditClick(e) {
+    window.location.pathname = `/newNote/${this.props.note._id}`;
+  }
   onDeleteClick(e) {
     this.props.deleteNote(this.props.note._id);
   }
