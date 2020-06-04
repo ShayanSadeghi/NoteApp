@@ -32,17 +32,7 @@ export const updateNote = (noteData, noteId) => dispatch => {
 
 //Delete a note
 export const deleteNote = noteId => dispatch => {
-  axios
-    .delete(`/api/notes/${noteId}`)
-    .then(res => {
-      getUserNotes();
-    })
-    .catch(err => {
-      dispatch({
-        type: GET_ERRORS,
-        payload: err,
-      });
-    });
+  axios.delete(`/api/notes/${noteId}`);
 };
 
 //Clear notes
