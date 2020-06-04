@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import { Provider } from "react-redux";
 import store from "./store";
+
+import PrivateRoute from "./components/PrivateRoute";
 
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
@@ -46,8 +48,12 @@ class App extends Component {
           <Navbar />
           <Route exact path="/" component={Signup} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/dashboard" component={Dashboard} />
-          <Route path="/newNote" component={Note} />
+          <Switch>
+            <PrivateRoute exact path="/dashboard" component={Dashboard} />
+          </Switch>
+          <Switch>
+            <PrivateRoute path="/newNote" component={Note} />
+          </Switch>
         </Router>
         <Footer />
       </Provider>

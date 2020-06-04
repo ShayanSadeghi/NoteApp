@@ -23,6 +23,10 @@ class Login extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
+    if (props.auth.isAuthenticated) {
+      props.history.push("/dashboard");
+      return null;
+    }
     if (props.errors) {
       return {
         errors: props.errors,
@@ -30,7 +34,7 @@ class Login extends Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidMount() {
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/dashboard");
     }

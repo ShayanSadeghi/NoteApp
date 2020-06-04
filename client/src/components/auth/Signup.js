@@ -27,9 +27,13 @@ class Signup extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
+    if (props.auth.isAuthenticated) {
+      props.history.push("/dashboard");
+      return null;
+    }
     if (props.errors) {
       return {
-        errors: props.errors,  //{errors} actually means this.state.errors
+        errors: props.errors, //{errors} actually means this.state.errors
       };
     }
   }
@@ -160,6 +164,7 @@ Signup.propTypes = {
 };
 
 const mapStateToProps = state => ({
+  auth: state.auth,
   errors: state.errors,
 });
 
