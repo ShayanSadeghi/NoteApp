@@ -49,6 +49,7 @@ router.put(
           {
             title: req.body.title,
             body: req.body.body,
+            date: new Date(),
           }
         ).then(() => res.json({ success: true }));
       })
