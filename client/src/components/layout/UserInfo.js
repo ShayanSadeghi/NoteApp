@@ -9,7 +9,7 @@ export default class UserInfo extends Component {
     const { user } = this.props;
     return (
       <div className=" container mb-4 d-inline-block w20rem">
-        <div className="mr-auto card border border-dark p-3">
+        <div className="mr-auto card border border-dark p-3 w18rem">
           <div className="card-body">
             <img src="" alt="" className="card-img-top" />
             <p className="card-title">{user.name}</p>

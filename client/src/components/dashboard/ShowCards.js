@@ -12,7 +12,7 @@ class ShowCards extends Component {
 
   render() {
     return (
-      <div className="card mr-auto mb-3 w18rem">
+      <div className="w18rem card  mr-auto mb-3 ">
         <div className="card-body">
           <img src="" alt="" className="card-img-top" />
           <h5 className="card-title">{this.props.note.title}</h5>

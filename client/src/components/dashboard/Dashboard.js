@@ -42,15 +42,9 @@ class Dashboard extends Component {
 
     return (
       <div className="dashboard">
-        <div className="container">
-          <div className="row">
-            <UserInfo
-              className="float-left"
-              user={user}
-              history={this.props.history}
-            />
-            <div className="">{dashboardContent}</div>
-          </div>
+        <UserInfo user={user} history={this.props.history} />
+        <div class="container d-inline-block ">
+          <div class="row m-auto">{dashboardContent}</div>
         </div>
       </div>
     );
