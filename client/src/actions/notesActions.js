@@ -25,6 +25,10 @@ export const saveNote = noteData => dispatch => {
   axios.post("/api/notes", noteData);
 };
 
+//Update note
+export const updateNote = (noteData, noteId) => dispatch => {
+  axios.put(`/api/notes/${noteId}`, noteData);
+};
 
 //Delete a note
 export const deleteNote = noteId => dispatch => {
