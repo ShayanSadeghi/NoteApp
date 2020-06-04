@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { saveNote, getUserNotes } from "../../actions/notesActions";
-
+import { saveNote, getUserNotes, updateNote } from "../../actions/notesActions";
+let pathSplited;
 class Note extends Component {
   constructor() {
     super();
@@ -33,8 +33,16 @@ class Note extends Component {
       title: this.state.title,
       body: this.state.body,
     };
-    this.props.saveNote(noteData);
+
+    pathSplited = window.location.pathname.split("/");
+    if (pathSplited.length === 3) {
+      this.props.updateNote(noteData, pathSplited[2]);
+    } else {
+      this.props.saveNote(noteData);
+    }
+
     this.props.history.push("/dashboard");
+    this.props.getUserNotes();
   }
 
   onCancelClik() {
@@ -50,7 +58,7 @@ class Note extends Component {
   }
 
   render() {
-    const pathSplited = window.location.pathname.split("/");
+    pathSplited = window.location.pathname.split("/");
     if (pathSplited.length === 3 && this.state.isNoteEmpty) {
       this.props.notes.forEach(note => {
         if (note._id === pathSplited[2]) {
@@ -61,8 +69,6 @@ class Note extends Component {
           });
         }
       });
-
-      // this.setState({ title: currentNote.title });
     }
     return (
       <div className="note row">
@@ -114,10 +120,13 @@ Note.propTypes = {
   auth: PropTypes.object.isRequired,
   saveNote: PropTypes.func.isRequired,
   getUserNotes: PropTypes.func.isRequired,
+  updateNote: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
   notes: state.notes,
 });
-export default connect(mapStateToProps, { saveNote, getUserNotes })(Note);
+export default connect(mapStateToProps, { saveNote, getUserNotes, updateNote })(
+  Note
+);
