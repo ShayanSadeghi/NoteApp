@@ -43,8 +43,8 @@ class Dashboard extends Component {
     return (
       <div className="dashboard">
         <UserInfo user={user} history={this.props.history} />
-        <div class="container d-inline-block ">
-          <div class="row m-auto">{dashboardContent}</div>
+        <div className="container d-inline-block ">
+          <div className="row m-auto">{dashboardContent}</div>
         </div>
       </div>
     );
