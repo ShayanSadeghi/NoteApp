@@ -16,9 +16,35 @@ class Navbar extends Component {
     this.props.logoutUser();
   };
 
+  toggleDarkMode = e => {
+    localStorage.setItem("darkmode", e);
+    window.location.href = window.location.href;
+  };
+
   render() {
     const { isAuthenticated, user } = this.props.auth;
     let NavContent;
+    let mode;
+
+    let iMode = localStorage.getItem("darkmode");
+    if (iMode === "true") {
+      mode = (
+        <Switch
+          defaultChecked
+          onChange={this.toggleDarkMode.bind(this)}
+          checkedChildren={<i className="fas fa-moon"> </i>}
+          unCheckedChildren={<i className="fas fa-moon"></i>}
+        />
+      );
+    } else {
+      mode = (
+        <Switch
+          onChange={this.toggleDarkMode.bind(this)}
+          checkedChildren={<i className="fas fa-moon"> </i>}
+          unCheckedChildren={<i className="fas fa-moon"></i>}
+        />
+      );
+    }
 
     if (!isAuthenticated) {
       //Guest Content
@@ -91,10 +117,7 @@ class Navbar extends Component {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="mobile-nav">
-            <Switch
-              checkedChildren={<i className="fas fa-moon"> </i>}
-              unCheckedChildren={<i className="fas fa-moon"></i>}
-            />
+            {mode}
             {NavContent}
           </div>
         </div>
