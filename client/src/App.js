@@ -18,6 +18,7 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 import { clearNotes } from "./actions/notesActions";
 import jwt_decode from "jwt-decode";
 
+import "antd/dist/antd.css";
 import "./App.css";
 
 if (localStorage.jwtToken) {

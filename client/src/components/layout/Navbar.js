@@ -6,6 +6,9 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { clearNotes } from "../../actions/notesActions";
 
+import { Switch } from "antd";
+// import { CheckOutlined } from "@ant-design/icons";
+
 class Navbar extends Component {
   onLogoutClick = e => {
     e.preventDefault();
@@ -88,6 +91,10 @@ class Navbar extends Component {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="mobile-nav">
+            <Switch
+              checkedChildren={<i className="fas fa-moon"> </i>}
+              unCheckedChildren={<i className="fas fa-moon"></i>}
+            />
             {NavContent}
           </div>
         </div>
