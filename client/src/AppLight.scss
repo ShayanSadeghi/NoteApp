@@ -1,0 +1,13 @@
+$backg: rgb(255, 255, 255);
+$overlayColor: rgba(182, 182, 182, 0.7);
+
+body {
+  background-color: $backg;
+}
+
+.overlay {
+  background-color: $overlayColor;
+  h1 {
+    color: #007BBF;
+  }
+}

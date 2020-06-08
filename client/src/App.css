@@ -8,8 +8,7 @@
   margin-bottom: -50px;
 }
 
-.dark-overlay {
-  background-color: rgba(0, 0, 0, 0.7);
+.overlay {
   position: absolute;
   top: 0;
   left: 0;
