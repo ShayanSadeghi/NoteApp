@@ -21,6 +21,14 @@ import jwt_decode from "jwt-decode";
 import "antd/dist/antd.css";
 import "./App.css";
 
+const darkmode = localStorage.getItem("darkmode") === "true" ? true : false;
+
+if (darkmode) {
+  require("./AppDark.scss");
+} else {
+  require("./AppLight.scss");
+}
+
 if (localStorage.jwtToken) {
   // Set auth token header auth
   setAuthToken(localStorage.jwtToken);

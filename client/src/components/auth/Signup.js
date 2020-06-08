@@ -56,7 +56,7 @@ class Signup extends Component {
 
     return (
       <div className="landing">
-        <div className="dark-overlay text-light landing-inner">
+        <div className="overlay text-light landing-inner">
           <div className="container">
             <div className="row">
               <div className="col-md-12 text-center">

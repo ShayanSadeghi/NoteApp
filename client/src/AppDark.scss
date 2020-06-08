@@ -1,0 +1,33 @@
+$bgColor: #333;
+$overlayColor: rgba(0, 0, 0, 0.7);
+$cardBgColor: rgb(37, 37, 37);
+$cardTxtColor: white;
+$inputColor: silver;
+
+body {
+  background-color: $bgColor;
+}
+
+.overlay {
+  background-color: $overlayColor;
+  h1 {
+    color: grey;
+  }
+}
+
+.form-control {
+  background-color: $inputColor;
+  &:focus {
+    background-color: $inputColor;
+  }
+}
+
+.dashboard,
+.note {
+  background-color: $bgColor;
+}
+.card,
+.card h5 {
+  background-color: $cardBgColor;
+  color: $cardTxtColor;
+}
