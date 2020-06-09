@@ -18,7 +18,8 @@ class Navbar extends Component {
 
   toggleDarkMode = e => {
     localStorage.setItem("darkmode", e);
-    window.location.href = window.location.href;
+    window.location.reload();
+    // window.location.href = window.location.href;
   };
 
   render() {
