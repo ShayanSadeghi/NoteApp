@@ -1,11 +1,19 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getUserNotes } from "../../actions/notesActions";
+import { getUserNotes, deleteNote } from "../../actions/notesActions";
 import ShowCards from "./ShowCards";
 import UserInfo from "../layout/UserInfo";
 
 class Dashboard extends Component {
+  editHandler(id) {
+    window.location.pathname = `/newNote/${id}`;
+  }
+
+  deleteHandler = id => {
+    this.props.deleteNote(id);
+  };
+
   componentDidMount() {
     this.props.getUserNotes();
   }
@@ -35,7 +43,12 @@ class Dashboard extends Component {
       } else {
         //if user has some notes, we show them here
         dashboardContent = notes.map(note => (
-          <ShowCards key={note._id} note={note} />
+          <ShowCards
+            key={note._id}
+            note={note}
+            deleteHandler={this.deleteHandler.bind(this)}
+            editHandler={this.editHandler.bind(this)}
+          />
         ));
       }
     }
@@ -62,4 +75,6 @@ const mapStateToProps = state => ({
   notes: state.notes,
 });
 
-export default connect(mapStateToProps, { getUserNotes })(Dashboard);
+export default connect(mapStateToProps, { getUserNotes, deleteNote })(
+  Dashboard
+);
