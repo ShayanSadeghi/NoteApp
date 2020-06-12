@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { saveNote, getUserNotes, updateNote } from "../../actions/notesActions";
+import InputGroup from "../common/inputGroup";
+
 let pathSplited;
 class Note extends Component {
   constructor() {
@@ -75,39 +77,36 @@ class Note extends Component {
         <div className="container col-md-8 d-inline-block">
           <div className=" m-auto">
             <form onSubmit={this.onSubmit}>
-              <div className="form-group container m-auto">
-                <input
-                  id="title"
-                  value={this.state.title}
-                  onChange={this.onChange}
-                  name="title"
-                  className="form-control mb-2"
-                  placeholder="Title"
-                  type="text"
-                />
-                <textarea
-                  id="body"
-                  value={this.state.body}
-                  onChange={this.onChange}
-                  name="body"
-                  className="form-control mb-2"
-                  placeholder="Body"
-                  rows="10"></textarea>
-                <button
-                  type="submit"
-                  className="btn mr-2 btn-outline-success form-control-sm"
-                  disabled={!this.state.title && !this.state.body}>
-                  {" "}
-                  Save
-                </button>
-                <button
-                  onClick={this.onCancelClik}
-                  type="button"
-                  className=" btn btn-outline-danger form-control-sm">
-                  {" "}
-                  Cancel
-                </button>
-              </div>
+              <InputGroup
+                value={this.state.title}
+                onChange={this.onChange}
+                name="title"
+                className="form-control mb-2"
+                placeholder="Title"
+                type="text"
+              />
+              <textarea
+                id="body"
+                value={this.state.body}
+                onChange={this.onChange}
+                name="body"
+                className="form-control mb-2"
+                placeholder="Body"
+                rows="10"></textarea>
+              <button
+                type="submit"
+                className="btn mr-2 btn-outline-success form-control-sm"
+                disabled={!this.state.title && !this.state.body}>
+                {" "}
+                Save
+              </button>
+              <button
+                onClick={this.onCancelClik}
+                type="button"
+                className=" btn btn-outline-danger form-control-sm">
+                {" "}
+                Cancel
+              </button>
             </form>
           </div>
         </div>

@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import classnames from "classnames";
 
 import { loginUser } from "../../actions/authActions";
+import InputGroup from "../common/inputGroup";
 
 class Login extends Component {
   constructor() {
@@ -68,42 +68,24 @@ class Login extends Component {
               <div className="container col-md-6 text-light text-center">
                 <div className="sign-up-form">
                   <form noValidate onSubmit={this.onSubmit}>
-                    <div className="form-group">
-                      <label htmlFor="email">Email</label>
-                      <input
-                        name="email"
-                        value={this.state.email}
-                        onChange={this.onChange}
-                        className={classnames("form-control", {
-                          "is-invalid": errors.email,
-                        })}
-                        type="email"
-                      />
-                      {errors.email ? (
-                        <div className="invalid-feedback">{errors.email} </div>
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="password">Password</label>
-                      <input
-                        name="password"
-                        value={this.state.password}
-                        onChange={this.onChange}
-                        className={classnames("form-control", {
-                          "is-invalid": errors.password,
-                        })}
-                        type="password"
-                      />
-                      {errors.password ? (
-                        <div className="invalid-feedback">
-                          {errors.password}{" "}
-                        </div>
-                      ) : (
-                        ""
-                      )}
-                    </div>
+                    <InputGroup
+                      name="email"
+                      placeholder="Email"
+                      value={this.state.email}
+                      error={errors.email}
+                      icon="fas fa-at"
+                      onChange={this.onChange}
+                      type="email"
+                    />
+                    <InputGroup
+                      name="password"
+                      placeholder="Password"
+                      value={this.state.password}
+                      error={errors.password}
+                      icon="fas fa-lock"
+                      onChange={this.onChange}
+                      type="password"
+                    />
                     <button type="submit" className="btn btn-primary mr-5">
                       Login
                     </button>
