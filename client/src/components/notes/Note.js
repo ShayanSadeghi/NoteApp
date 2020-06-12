@@ -78,24 +78,33 @@ class Note extends Component {
           <div className=" m-auto">
             <form onSubmit={this.onSubmit}>
               <InputGroup
+                
                 value={this.state.title}
                 onChange={this.onChange}
                 name="title"
                 className="form-control mb-2"
-                placeholder="Title"
                 type="text"
+                label="Title"
               />
-              <textarea
-                id="body"
-                value={this.state.body}
-                onChange={this.onChange}
-                name="body"
-                className="form-control mb-2"
-                placeholder="Body"
-                rows="10"></textarea>
+              <div className="input-group">
+                <div className="input-group-prepend mb-2">
+                  <span className="input-group-text">Note</span>
+                </div>
+                <textarea
+                  
+                  className={
+                    "form-control form-control mb-2 input-group-prepend"
+                  }
+                  name="body"
+                  value={this.state.body}
+                  onChange={this.onChange}
+                  rows="10"
+                />
+              </div>
+
               <button
                 type="submit"
-                className="btn mr-2 btn-outline-success form-control-sm"
+                className="float-right btn mr-2 text-success form-control-lg"
                 disabled={!this.state.title && !this.state.body}>
                 {" "}
                 Save
@@ -103,7 +112,7 @@ class Note extends Component {
               <button
                 onClick={this.onCancelClik}
                 type="button"
-                className=" btn btn-outline-danger form-control-sm">
+                className="btn btn-outline-danger form-control-lg">
                 {" "}
                 Cancel
               </button>

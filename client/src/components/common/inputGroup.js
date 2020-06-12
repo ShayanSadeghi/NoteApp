@@ -10,12 +10,14 @@ const InputGroup = ({
   icon,
   onChange,
   type,
+  label,
 }) => {
   return (
     <div className="input-group mb-3">
       <div className="input-group-prepend">
         <span className="input-group-text">
-          <i className={icon} />
+          {{ icon } ? <i className={icon} /> : null}
+          {{ label } ? <span>{label}</span> : null}
         </span>
       </div>
       <input
@@ -40,6 +42,7 @@ InputGroup.protoTypes = {
   icon: PropTypes.string,
   error: PropTypes.string,
   type: PropTypes.string.isRequired,
+  label: PropTypes.string,
   onChange: PropTypes.func.isRequired,
 };
 
