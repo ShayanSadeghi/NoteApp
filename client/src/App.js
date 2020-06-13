@@ -12,6 +12,7 @@ import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
 import Dashboard from "./components/dashboard/Dashboard";
 import Note from "./components/notes/Note";
+import Profile from "./components/profile/Profile";
 
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
@@ -62,6 +63,9 @@ class App extends Component {
           </Switch>
           <Switch>
             <PrivateRoute path="/newNote" component={Note} />
+          </Switch>
+          <Switch>
+            <PrivateRoute path="/profile" component={Profile} />
           </Switch>
         </Router>
         <Footer />

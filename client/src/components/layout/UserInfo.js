@@ -19,7 +19,9 @@ export default class UserInfo extends Component {
               onClick={this.onNewNoteClick.bind(this)}>
               New Note
             </button>
-            <button className="btn btn-sm btn-outline-secondary ">
+            <button
+              className="btn btn-sm btn-outline-secondary"
+              onClick={() => this.props.history.push("/profile")}>
               Profile
             </button>
             <button className="btn btn-sm btn-outline-secondary">Stats</button>
