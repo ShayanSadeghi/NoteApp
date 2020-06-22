@@ -80,7 +80,12 @@ export default class Profile extends Component {
               style={{ width: "100%" }}
             />{" "}
             <div className="form-control custom-file mb-3">
-              <input className="custom-file-input" type="file" id="inputFile" />
+              <input
+                className="custom-file-input"
+                type="file"
+                accept="image/*"
+                id="inputFile"
+              />
               <label for="inputFile" class="custom-file-label">
                 {" "}
                 Profile Image{" "}

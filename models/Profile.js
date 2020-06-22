@@ -7,17 +7,16 @@ const ProfileSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "users",
   },
-  fName: {
+  fname: {
     type: String,
     required: true,
   },
-  lName: {
+  lname: {
     type: String,
     required: true,
   },
   phone: {
     type: Number,
-    required: true,
   },
   address: {
     type: String,
@@ -29,7 +28,7 @@ const ProfileSchema = new Schema({
     type: Date,
   },
   image: {
-    type: pat,
+    type: Schema.Types.ObjectId,
   },
 });
 
