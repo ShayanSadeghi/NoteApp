@@ -53,6 +53,25 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   upload.single("inputFile"),
   (req, res) => {
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        if (profile) {
+          profile.image = req.file.id;
+          profile.save();
+        } else {
+          const newProfile = new Profile({
+            user: req.user.id,
+            image: req.file.id,
+          });
+          newProfile
+            .save()
+            .then(profile => console.log(profile))
+            .catch(err => console.log(err));
+        }
+      })
+      .catch(error => {
+        res.json(error);
+      });
     res.json({ file: req.file });
   }
 );

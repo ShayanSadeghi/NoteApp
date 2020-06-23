@@ -9,11 +9,9 @@ const ProfileSchema = new Schema({
   },
   fname: {
     type: String,
-    required: true,
   },
   lname: {
     type: String,
-    required: true,
   },
   phone: {
     type: Number,
@@ -29,6 +27,7 @@ const ProfileSchema = new Schema({
   },
   image: {
     type: Schema.Types.ObjectId,
+    ref: "uploads.files",
   },
 });
 
