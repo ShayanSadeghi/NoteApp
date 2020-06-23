@@ -48,13 +48,19 @@ const storage = new GridFsStorage({
 
 const upload = multer({ storage });
 
-router.post("/upload", upload.single("inputFile"), (req, res) => {
-  res.json({ file: req.file });
-});
+router.post(
+  "/upload",
+  passport.authenticate("jwt", { session: false }),
+  upload.single("inputFile"),
+  (req, res) => {
+    res.json({ file: req.file });
+  }
+);
 
 router.get(
   "/",
   passport.authenticate("jwt", { session: false }),
+  upload.single("inputFile"),
   (req, res) => {
     Profile.find({ user: req.user.id }).then(profile => {
       return res.json(profile);
