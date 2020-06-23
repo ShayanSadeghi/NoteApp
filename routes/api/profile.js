@@ -70,14 +70,45 @@ router.post(
       user: req.user.id,
       fname: req.body.fname,
       lname: req.body.lname,
+      phone: req.body.phone,
+      address: req.body.address,
+      job: req.body.job,
+      birthdate: req.body.birthdate,
     });
 
     newProfile
       .save()
-      .then(profile => res.json(profile))
+      .then(profile => {
+        res.json(profile);
+      })
       .catch(err => {
-        console.log(err);
+        res.json(err);
       });
+  }
+);
+
+router.put(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        if (profile) {
+          profile.fname = req.body.fname;
+          profile.lname = req.body.lname;
+          profile.phone = req.body.phone;
+          profile.address = req.body.address;
+          profile.job = req.body.job;
+          profile.birthdate = req.body.birthdate;
+          profile
+            .save()
+            .then(profile => res.json(profile))
+            .catch(err => res.json(err));
+        } else {
+          res.json({ error: "Profile not found" });
+        }
+      })
+      .catch(err => res.json(err));
   }
 );
 
