@@ -48,6 +48,7 @@ const storage = new GridFsStorage({
 
 const upload = multer({ storage });
 
+//Upload File
 router.post(
   "/upload",
   passport.authenticate("jwt", { session: false }),
@@ -73,6 +74,25 @@ router.post(
         res.json(error);
       });
     res.json({ file: req.file });
+  }
+);
+
+router.delete(
+  "/files/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    gfs.remove({ _id: req.params.id, root: "uploads" }, (err, gridStore) => {
+      if (err) {
+        return res.status(404).json({ err });
+      }
+      Profile.findOne({ user: req.user.id })
+        .then(profile => {
+          profile.image = null;
+          profile.save();
+        })
+        .catch(error => res.json(error));
+      res.json({ successful: true });
+    });
   }
 );
 
