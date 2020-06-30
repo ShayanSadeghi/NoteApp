@@ -38,6 +38,7 @@ class Profile extends Component {
     } else {
       this.props.setUserProfile(this.state, true);
     }
+    this.props.history.push("/");
   };
   render() {
     // No Need to these data, just for test features
@@ -144,10 +145,16 @@ class Profile extends Component {
                 Profile Image{" "}
               </label>
             </div>
-            <button className="form-control btn btn-outline-success mb-3 ">
+            <button
+              type="submit"
+              className="form-control btn btn-outline-success mb-3 ">
               Submit
             </button>
-            <button className="form-control btn btn-danger">Cancel</button>
+            <button
+              onClick={() => this.props.history.push("/")}
+              className="form-control btn btn-danger">
+              Cancel
+            </button>
           </form>
         </div>
       </div>
