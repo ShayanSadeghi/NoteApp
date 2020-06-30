@@ -20,20 +20,38 @@ export const getUserProfile = () => dispatch => {
     });
 };
 
-export const setUserProfile = userProfile => dispatch => {
-  axios
-    .post("/api/profile", userProfile)
-    .then(res => {
-      dispatch({
-        type: SET_USER_PROFILE,
-        payload: res.data,
+export const setUserProfile = (userProfile, isNew) => dispatch => {
+  if (isNew) {
+    axios
+      .post("/api/profile", userProfile)
+      .then(res => {
+        dispatch({
+          type: SET_USER_PROFILE,
+          payload: res.data,
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch({
+          type: GET_ERRORS,
+          payload: err,
+        });
       });
-    })
-    .catch(err => {
-      console.log(err);
-      dispatch({
-        type: GET_ERRORS,
-        payload: err,
+  } else {
+    axios
+      .put("/api/profile", userProfile)
+      .then(res => {
+        dispatch({
+          type: SET_USER_PROFILE,
+          payload: res.data,
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch({
+          type: GET_ERRORS,
+          payload: err,
+        });
       });
-    });
+  }
 };

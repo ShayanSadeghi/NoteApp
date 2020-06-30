@@ -33,7 +33,11 @@ class Profile extends Component {
   };
   submitHandler = e => {
     e.preventDefault();
-    this.props.setUserProfile(this.state);
+    if (this.props.profile._id) {
+      this.props.setUserProfile(this.state, false);
+    } else {
+      this.props.setUserProfile(this.state, true);
+    }
   };
   render() {
     // No Need to these data, just for test features
