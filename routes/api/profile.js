@@ -99,7 +99,6 @@ router.delete(
 router.get(
   "/",
   passport.authenticate("jwt", { session: false }),
-  upload.single("inputFile"),
   (req, res) => {
     Profile.find({ user: req.user.id }).then(profile => {
       return res.json(profile);

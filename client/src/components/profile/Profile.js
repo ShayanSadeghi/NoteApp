@@ -1,28 +1,42 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Input, Select, DatePicker } from "antd";
 
-const { Option } = Select;
+import { getUserProfile, setUserProfile } from "../../actions/profileActions";
 
-export default class Profile extends Component {
-  constructor() {
-    super();
+const { Option } = Select;
+class Profile extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
       fname: "",
       lname: "",
       phone: "",
       address: "",
       job: "",
-      errors: {},
+      birthdate: "",
     };
+    this.changeHandler = this.changeHandler.bind(this);
+    this.submitHandler = this.submitHandler.bind(this);
   }
 
-  changeHandler = e => {
-    this.setState({ [e.target.name]: e.target.value });
+  componentDidMount() {
+    console.log("MOUNT", this.state);
+    this.props.getUserProfile();
+  }
+  changeHandler = (e, s) => {
+    if (s) {
+      this.setState({ birthdate: s });
+    } else {
+      this.setState({ [e.target.name]: e.target.value });
+    }
   };
-
+  submitHandler = e => {
+    e.preventDefault();
+    this.props.setUserProfile(this.state);
+  };
   render() {
     // No Need to these data, just for test features
-    const { errors } = this.state;
     let Codes = [
       {
         name: "Afghanistan",
@@ -62,23 +76,58 @@ export default class Profile extends Component {
     return (
       <div className="container col-md-6">
         <div className="row">
-          <form class="m-auto">
-            <Input size="large" className="mb-3" placeholder="First Name" />
-            <Input size="large" className="mb-3" placeholder="Last Name" />
+          <form class="m-auto" onSubmit={this.submitHandler}>
             <Input
+              value={this.state.fname}
+              onChange={this.changeHandler}
+              name="fname"
+              size="large"
+              className="mb-3"
+              placeholder="First Name"
+            />
+            <Input
+              value={this.state.lname}
+              onChange={this.changeHandler}
+              name="lname"
+              size="large"
+              className="mb-3"
+              placeholder="Last Name"
+            />
+            <Input
+              value={this.state.phone}
+              onChange={this.changeHandler}
               addonBefore={selectBefore}
+              name="phone"
               size="large"
               className="mb-3"
               placeholder="Phone"
             />
-            <Input size="large" className="mb-3" placeholder="Address" />
-            <Input size="large" className="mb-3" placeholder="Job" />
+            <Input
+              value={this.state.address}
+              onChange={this.changeHandler}
+              name="address"
+              size="large"
+              className="mb-3"
+              placeholder="Address"
+            />
+            <Input
+              value={this.state.job}
+              onChange={this.changeHandler}
+              name="job"
+              size="large"
+              className="mb-3"
+              placeholder="Job"
+            />
             <DatePicker
+              onChange={this.changeHandler}
+              defaultValue={this.state.birthdate}
+              name="birthdate"
+              format="YYYY-MM-DD"
               className="mb-3"
               placeholder="Birth Date"
               size="large"
               style={{ width: "100%" }}
-            />{" "}
+            />
             <div className="form-control custom-file mb-3">
               <input
                 className="custom-file-input"
@@ -101,3 +150,11 @@ export default class Profile extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  profile: state.profile,
+});
+
+export default connect(mapStateToProps, { getUserProfile, setUserProfile })(
+  Profile
+);

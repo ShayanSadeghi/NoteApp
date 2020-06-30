@@ -23,7 +23,7 @@ const ProfileSchema = new Schema({
     type: String,
   },
   birthdate: {
-    type: Date,
+    type: String,
   },
   image: {
     type: Schema.Types.ObjectId,
