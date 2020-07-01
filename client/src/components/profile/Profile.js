@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import { Input, Select, DatePicker } from "antd";
-
+import moment from "moment";
 import { getUserProfile, setUserProfile } from "../../actions/profileActions";
 
 const { Option } = Select;
 class Profile extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       fname: "",
       lname: "",
@@ -21,17 +22,30 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    console.log("MOUNT", this.state);
     this.props.getUserProfile();
   }
-  changeHandler = (e, s) => {
+  componentWillReceiveProps(nextProp) {
+    if (nextProp.profile) {
+      this.setState({
+        fname: nextProp.profile.fname,
+        lname: nextProp.profile.lname,
+        phone: nextProp.profile.phone,
+        address: nextProp.profile.address,
+        job: nextProp.profile.job,
+        birthdate: nextProp.profile.birthdate,
+      });
+    }
+  }
+
+  changeHandler(e, s) {
     if (s) {
       this.setState({ birthdate: s });
     } else {
       this.setState({ [e.target.name]: e.target.value });
     }
-  };
-  submitHandler = e => {
+  }
+
+  submitHandler(e) {
     e.preventDefault();
     if (this.props.profile._id) {
       this.props.setUserProfile(this.state, false);
@@ -39,7 +53,7 @@ class Profile extends Component {
       this.props.setUserProfile(this.state, true);
     }
     this.props.history.push("/");
-  };
+  }
   render() {
     // No Need to these data, just for test features
     let Codes = [
@@ -125,7 +139,7 @@ class Profile extends Component {
             />
             <DatePicker
               onChange={this.changeHandler}
-              defaultValue={this.state.birthdate}
+              value={moment(this.state.birthdate, "YYYY-MM-DD")}
               name="birthdate"
               format="YYYY-MM-DD"
               className="mb-3"
@@ -161,7 +175,12 @@ class Profile extends Component {
     );
   }
 }
-
+Profile.propTypes = {
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
+  getUserProfile: PropTypes.func.isRequired,
+  setUserProfile: PropTypes.func.isRequired,
+};
 const mapStateToProps = state => ({
   profile: state.profile,
 });
