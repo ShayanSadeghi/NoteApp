@@ -2,6 +2,7 @@ import axios from "axios";
 
 import { GET_USER_PROFILE, SET_USER_PROFILE, GET_ERRORS } from "./types";
 
+//Get user profile data
 export const getUserProfile = () => dispatch => {
   axios
     .get("/api/profile")
@@ -20,6 +21,7 @@ export const getUserProfile = () => dispatch => {
     });
 };
 
+// Create or Update user profile
 export const setUserProfile = (userProfile, isNew) => dispatch => {
   if (isNew) {
     axios
@@ -47,11 +49,35 @@ export const setUserProfile = (userProfile, isNew) => dispatch => {
         });
       })
       .catch(err => {
-        console.log(err);
         dispatch({
           type: GET_ERRORS,
           payload: err,
         });
       });
   }
+};
+
+//Upload profile picture
+export const uploadProfilePicture = file => dispatch => {
+  console.log("Path", file);
+  let bodyFormData = new FormData();
+  bodyFormData.append("inputFile", file);
+  axios({
+    method: "post",
+    url: "/api/profile/upload",
+    data: bodyFormData,
+    headers: { "Content-Type": "multipart/form-data" },
+  })
+    .then(res => {
+      dispatch({
+        type: SET_USER_PROFILE,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err,
+      });
+    });
 };

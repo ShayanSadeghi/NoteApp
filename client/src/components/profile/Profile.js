@@ -3,7 +3,11 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Input, Select, DatePicker } from "antd";
 import moment from "moment";
-import { getUserProfile, setUserProfile } from "../../actions/profileActions";
+import {
+  getUserProfile,
+  setUserProfile,
+  uploadProfilePicture,
+} from "../../actions/profileActions";
 
 const { Option } = Select;
 class Profile extends Component {
@@ -47,6 +51,13 @@ class Profile extends Component {
 
   submitHandler(e) {
     e.preventDefault();
+    const file = document.getElementById("inputFile").files;
+    //user profile picture
+    if (file[0]) {
+      this.props.uploadProfilePicture(file[0]);
+    }
+
+    //user profile data
     if (this.props.profile._id) {
       this.props.setUserProfile(this.state, false);
     } else {
@@ -185,6 +196,8 @@ const mapStateToProps = state => ({
   profile: state.profile,
 });
 
-export default connect(mapStateToProps, { getUserProfile, setUserProfile })(
-  Profile
-);
+export default connect(mapStateToProps, {
+  getUserProfile,
+  setUserProfile,
+  uploadProfilePicture,
+})(Profile);
