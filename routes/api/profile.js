@@ -77,6 +77,40 @@ router.post(
   }
 );
 
+// get user profile image
+router.get(
+  "/image/:fileId",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    gfs.files.findOne(
+      { _id: mongoose.Types.ObjectId(req.params.fileId) },
+      { lean: true },
+      (err, file) => {
+        console.log(file);
+        if (!file || file.length === 0) {
+          return res.status(404).json({
+            err: "No file exist",
+          });
+        }
+        // Check file type
+        if (
+          file.contentType === "image/jpeg" ||
+          file.contentType === "image/png"
+        ) {
+          //Read output to browser
+          const readstream = gfs.createReadStream(file.filename);
+          readstream.pipe(res);
+        } else {
+          res.status(404).json({
+            err: "Not an image",
+          });
+        }
+      }
+    );
+  }
+);
+
+// delete user profile image
 router.delete(
   "/files/:id",
   passport.authenticate("jwt", { session: false }),
@@ -96,6 +130,7 @@ router.delete(
   }
 );
 
+// get user profile data
 router.get(
   "/",
   passport.authenticate("jwt", { session: false }),
@@ -106,6 +141,7 @@ router.get(
   }
 );
 
+// create new profile
 router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
@@ -131,6 +167,7 @@ router.post(
   }
 );
 
+// Update profile data
 router.put(
   "/",
   passport.authenticate("jwt", { session: false }),
