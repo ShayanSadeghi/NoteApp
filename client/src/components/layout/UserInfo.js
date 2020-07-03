@@ -24,7 +24,11 @@ export default class UserInfo extends Component {
               onClick={() => this.props.history.push("/profile")}>
               Profile
             </button>
-            <button className="btn btn-sm btn-outline-secondary">Stats</button>
+            <button
+              onClick={() => this.props.history.push("/stats")}
+              className="btn btn-sm btn-outline-secondary">
+              Stats
+            </button>
           </div>
         </div>
       </div>
