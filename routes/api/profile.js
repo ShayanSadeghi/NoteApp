@@ -80,13 +80,11 @@ router.post(
 // get user profile image
 router.get(
   "/image/:fileId",
-  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     gfs.files.findOne(
       { _id: mongoose.Types.ObjectId(req.params.fileId) },
       { lean: true },
       (err, file) => {
-        console.log(file);
         if (!file || file.length === 0) {
           return res.status(404).json({
             err: "No file exist",
