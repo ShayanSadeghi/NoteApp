@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Input, Select, DatePicker } from "antd";
+import { Input, Select, DatePicker, Avatar } from "antd";
 import moment from "moment";
 import {
   getUserProfile,
@@ -106,7 +106,16 @@ class Profile extends Component {
     return (
       <div className="container col-md-6">
         <div className="row">
-          <form class="m-auto" onSubmit={this.submitHandler}>
+          <form className="m-auto" onSubmit={this.submitHandler}>
+            {this.props.profile.image && (
+              <div className="row justify-content-center mb-3">
+                <Avatar
+                  src={`/api/profile/image/${this.props.profile.image}`}
+                  alt="avatar"
+                  size={192}
+                />
+              </div>
+            )}
             <Input
               value={this.state.fname}
               onChange={this.changeHandler}
