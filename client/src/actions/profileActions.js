@@ -1,6 +1,11 @@
 import axios from "axios";
 
-import { GET_USER_PROFILE, SET_USER_PROFILE, GET_ERRORS } from "./types";
+import {
+  GET_USER_PROFILE,
+  SET_USER_PROFILE,
+  REMOVE_USER_PROFILE,
+  GET_ERRORS,
+} from "./types";
 
 //Get user profile data
 export const getUserProfile = () => dispatch => {
@@ -59,7 +64,6 @@ export const setUserProfile = (userProfile, isNew) => dispatch => {
 
 //Upload profile picture
 export const uploadProfilePicture = file => dispatch => {
-  console.log("Path", file);
   let bodyFormData = new FormData();
   bodyFormData.append("inputFile", file);
   axios({
@@ -79,5 +83,24 @@ export const uploadProfilePicture = file => dispatch => {
         type: GET_ERRORS,
         payload: err,
       });
+    });
+};
+
+//Remove profile picture
+export const removeProfilePicture = fileId => dispatch => {
+  axios
+    .delete(`/api/profile/files/${fileId}`)
+    .then(res => {
+      dispatch({
+        type: REMOVE_USER_PROFILE,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err,
+      });
+      console.log(err);
     });
 };

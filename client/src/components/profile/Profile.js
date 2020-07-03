@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Input, Select, DatePicker, Avatar } from "antd";
+import { Input, Select, DatePicker, Avatar, Popover } from "antd";
 import moment from "moment";
 import {
   getUserProfile,
   setUserProfile,
   uploadProfilePicture,
+  removeProfilePicture,
 } from "../../actions/profileActions";
 
 const { Option } = Select;
@@ -103,17 +104,30 @@ class Profile extends Component {
       </Select>
     );
 
+    const avatarPopover = (
+      <div>
+        <a
+          className="text-danger"
+          onClick={() =>
+            this.props.removeProfilePicture(this.props.profile.image)
+          }>
+          Remove
+        </a>
+      </div>
+    );
     return (
       <div className="container col-md-6">
         <div className="row">
           <form className="m-auto" onSubmit={this.submitHandler}>
             {this.props.profile.image && (
               <div className="row justify-content-center mb-3">
-                <Avatar
-                  src={`/api/profile/image/${this.props.profile.image}`}
-                  alt="avatar"
-                  size={192}
-                />
+                <Popover content={avatarPopover} placement="bottom">
+                  <Avatar
+                    src={`/api/profile/image/${this.props.profile.image}`}
+                    alt="avatar"
+                    size={192}
+                  />
+                </Popover>
               </div>
             )}
             <Input
@@ -209,4 +223,5 @@ export default connect(mapStateToProps, {
   getUserProfile,
   setUserProfile,
   uploadProfilePicture,
+  removeProfilePicture,
 })(Profile);
