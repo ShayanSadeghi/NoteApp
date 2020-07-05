@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Bar, Line } from "react-chartjs-2";
+import { Bar, Line, Doughnut, Pie } from "react-chartjs-2";
 import { getUserNotes } from "../../actions/notesActions";
 
 class Stats extends Component {
@@ -14,6 +14,8 @@ class Stats extends Component {
           {
             label: "Notes",
             data: [],
+            borderWidth: 1,
+            borderColor: "#333",
           },
         ],
       },
@@ -25,8 +27,12 @@ class Stats extends Component {
   }
   componentWillReceiveProps(nextProp) {
     if (nextProp.notes) {
-      let newLabels = [];
-      let newData = [];
+      const newLabels = [];
+      const newData = [];
+      const newBgColor = [];
+      const o = Math.round,
+        r = Math.random,
+        s = 255;
       nextProp.notes.forEach(note => {
         const date = note.date.slice(0, 10);
         if (newLabels.indexOf(date) === -1) {
@@ -35,6 +41,18 @@ class Stats extends Component {
             note => note.date.slice(0, 10) === date
           );
           newData.push(newNotes.length);
+
+          newBgColor.push(
+            "rgba(" +
+              o(r() * s) +
+              "," +
+              o(r() * s) +
+              "," +
+              o(r() * s) +
+              "," +
+              r().toFixed(1) +
+              ")"
+          );
         }
       });
       const chartData = {
@@ -43,6 +61,7 @@ class Stats extends Component {
           {
             label: "Notes",
             data: newData,
+            backgroundColor: newBgColor,
           },
         ],
       };
