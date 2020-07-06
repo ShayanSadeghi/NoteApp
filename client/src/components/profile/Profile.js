@@ -37,15 +37,15 @@ class Profile extends Component {
         phone: nextProp.profile.phone,
         address: nextProp.profile.address,
         job: nextProp.profile.job,
-        birthdate: nextProp.profile.birthdate,
+        birthdate: nextProp.profile.birthdate
+          ? nextProp.profile.birthdate
+          : moment().format("YYYY-MM-DD"),
       });
     }
   }
 
-  changeHandler(e, s) {
-    if (s) {
-      this.setState({ birthdate: s });
-    } else {
+  changeHandler(e) {
+    if (e) {
       this.setState({ [e.target.name]: e.target.value });
     }
   }
